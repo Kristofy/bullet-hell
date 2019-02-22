@@ -1,5 +1,5 @@
 import generatePlayer from './player.js';
-import * as p5 from './node_modules/p5/lib/p5.min.js';
+import './node_modules/p5/lib/p5.min.js';
 
 const instance = new p5((p)=>{
     
