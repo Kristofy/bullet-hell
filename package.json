@@ -1,0 +1,15 @@
+{
+  "name": "bullet-hell",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^0.11.1",
+    "p5": "^0.7.3"
+  }
+}
