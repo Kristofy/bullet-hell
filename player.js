@@ -48,7 +48,9 @@ export default function generatePlayer(p){
                     this.projectiles.splice(i,1);
                 }else if(this.projectiles[i].lifeSpan<AVG_LIFESPAN-60&&p.dist(this.x,this.y,this.projectiles[i].pos.x,this.projectiles[i].pos.y)<this.r+this.projectiles[i].r){
                     p.background(0);
-                    p.fontSize(50);
+                    p.stroke(255);
+                    p.fill(255);
+                    p.textSize(50);
                     p.textAlign(p.CENTER, p.CENTER);
                     p.text('Game Over!',p.width/2,p.height/2);
                     p.noLoop();
