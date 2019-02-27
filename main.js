@@ -4,8 +4,11 @@ import generatePlayer from './player.js';
 import generateProjectile from './projectile.js';
 
 import './p5.min.js';
+
+
 const instance = new p5((p)=>{
-    
+
+    window.p=p;
     let Player;
     let canvas;
     let player;
@@ -40,7 +43,7 @@ const instance = new p5((p)=>{
         GameOver=false;
         projectiles=[];
         player=new Player(p.windowWidth/2,p.windowHeight/2,20,8,'w','s','a','d');
-
+        console.clear();
         p.loop();
     }
     p.windowResized = ()=> {
@@ -88,19 +91,29 @@ const instance = new p5((p)=>{
         p.text(`Score:\t${p.round(score)}\t\t Bullets: \t${player.projectiles.length+projectiles.length}\t\t Play time: ${time} sec`,5,5);
     }
     p.mouseClicked = ()=>{
-        player.handleMouseInput();
-        score+=3;
+
         if(GameOver){
-            if(p.dist(p.mouseX,p.mouseY,p.width/2,p.height/2+70)<60){
+            if(p.dist(p.mouseX,p.mouseY,p.width/2,p.height/2+70)<30){
                 reset();
             }
+        }else{
+            score+=3;
+            player.handleMouseInput();
         }
     }
     p.keyTyped = ()=>{
         //console.log("input: ",p.key,p.keyCode);
         player.handleInput(p.keyCode);
-
-    }    
+        if(p.keyCode==34){
+            let val = prompt("nem szép dolog csalni...");
+            console.log(val);
+            if(Number.isInteger(parseInt(val))){
+                console.log(val);
+                score=parseInt(val);
+                console.log("csaltam...");
+            } 
+        }
+    }   
    /* p.mouseDragged = ()=>{
         player.handleMouseInput();
     }*/
