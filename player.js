@@ -1,8 +1,9 @@
 import generateProjectile from './projectile.js'
+//import { GameOver } from './main.js';
 
 export default function generatePlayer(p){
     const AVG_LIFESPAN=60*60;
-    let Projectile=generateProjectile(p);
+     let Projectile=generateProjectile(p);
     return class Player {
         constructor(x,y,d=10,speed,up,down,left,rigth){
             this.x=x;
@@ -22,7 +23,7 @@ export default function generatePlayer(p){
                    p.show();
                }
         }
-        update(){
+        update(pro){
             if(this.y-this.r+this.yvel>0){
                 if(this.y+this.r+this.yvel<p.height){
                     this.y+=this.yvel;
@@ -53,18 +54,46 @@ export default function generatePlayer(p){
                     p.textSize(50);
                     p.textAlign(p.CENTER, p.CENTER);
                     p.text('Game Over!',p.width/2,p.height/2);
+                    p.textSize(30);
+                    p.fill(100);
+                    p.ellipse(p.width/2,p.height/2+70,60)
+                    p.fill(255);
+                    p.text('újra',p.width/2,p.height/2+70);
                     p.noLoop();
-                    console.log("fail");
+                    //console.log("fail");
+                    p.noLoop()
+                    return true;
                 }
             }
-            
+            for(let i=pro.length-1;i>=0;--i){
+                if(pro[i].lifeSpan<1){
+                    pro.splice(i,1);
+                }else if(p.dist(this.x,this.y,pro[i].pos.x,pro[i].pos.y)<this.r+pro[i].r){
+                    p.background(0);
+                    p.stroke(255);
+                    p.fill(255);
+                    p.textSize(50);
+                    p.textAlign(p.CENTER, p.CENTER);
+                    p.text('Game Over!',p.width/2,p.height/2);
+                    p.textSize(30);
+                    p.fill(100);
+                    p.ellipse(p.width/2,p.height/2+70,60)
+                    p.fill(255);
+                    p.text('újra',p.width/2,p.height/2+70);
+                    p.noLoop();
+                    //console.log("fail");
+                    p.noLoop()
+                    return true;
+                }
+            }
+            return false;
         }
         handleMouseInput(){
-            console.log("mouse clicked");
+            //console.log("mouse clicked");
             this.fire();
         }
         fire(){
-            this.projectiles.push(new Projectile(this.x,this.y,3,10,AVG_LIFESPAN));
+            this.projectiles.push(new Projectile(this.x,this.y,p.mouseX,p.mouseY,3,10,AVG_LIFESPAN));
         }
         handleInput(input){
             switch(input){
