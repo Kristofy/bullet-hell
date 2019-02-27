@@ -105,10 +105,8 @@ const instance = new p5((p)=>{
         //console.log("input: ",p.key,p.keyCode);
         player.handleInput(p.keyCode);
         if(p.keyCode==34){
-            let val = prompt("nem szép dolog csalni...");
             console.log(val);
             if(Number.isInteger(parseInt(val))){
-                console.log(val);
                 score=parseInt(val);
                 console.log("csaltam...");
             } 
