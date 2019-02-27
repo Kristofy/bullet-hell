@@ -89,6 +89,7 @@ const instance = new p5((p)=>{
     }
     p.mouseClicked = ()=>{
         player.handleMouseInput();
+        score+=3;
         if(GameOver){
             if(p.dist(p.mouseX,p.mouseY,p.width/2,p.height/2+70)<60){
                 reset();
